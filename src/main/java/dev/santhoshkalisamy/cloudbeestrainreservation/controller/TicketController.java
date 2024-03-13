@@ -1,6 +1,5 @@
 package dev.santhoshkalisamy.cloudbeestrainreservation.controller;
 
-import dev.santhoshkalisamy.cloudbeestrainreservation.entity.Ticket;
 import dev.santhoshkalisamy.cloudbeestrainreservation.exception.SeatNotAvailableException;
 import dev.santhoshkalisamy.cloudbeestrainreservation.exception.TicketNotFoundException;
 import dev.santhoshkalisamy.cloudbeestrainreservation.model.ChangeSeatRequest;
@@ -9,7 +8,14 @@ import dev.santhoshkalisamy.cloudbeestrainreservation.model.TicketPurchaseReques
 import dev.santhoshkalisamy.cloudbeestrainreservation.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/ticket")
@@ -31,8 +37,8 @@ public class TicketController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Boolean> deleteTicket(@PathVariable("id") int ticketId) throws TicketNotFoundException {
-        return ResponseEntity.status(200).body(ticketService.deleteTicket(ticketId));
+    public ResponseEntity<String> deleteTicket(@PathVariable("id") int ticketId) throws TicketNotFoundException {
+        return ResponseEntity.status(200).body(ticketService.deleteTicket(ticketId) ? "Success" : "Failed");
     }
 
     @PatchMapping("/{id}/seat")
