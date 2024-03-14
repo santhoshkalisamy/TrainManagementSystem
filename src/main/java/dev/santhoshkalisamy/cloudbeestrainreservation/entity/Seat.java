@@ -9,7 +9,7 @@ public class Seat {
     int seatNumber;
     @Column
     boolean allocated;
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "section_id", nullable = false)
     @JsonIgnore
     Section section;

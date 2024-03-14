@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class SectionServiceImpl implements SectionService {
-
-    @Autowired
     private SectionRepository sectionRepository;
+    @Autowired
+    public void setSectionRepository(SectionRepository sectionRepository) {
+        this.sectionRepository = sectionRepository;
+    }
 
     @Override
     public Section getSectionByName(String name, Boolean allocated) throws SectionNotFoundException {

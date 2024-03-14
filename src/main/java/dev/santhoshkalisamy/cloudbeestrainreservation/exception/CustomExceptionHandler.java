@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 public class CustomExceptionHandler {
     @ExceptionHandler(TrainFullException.class)
     public ResponseEntity<Error> handleTrainFullException() {
-        return ResponseEntity.status(400).body(new Error(101, "Sorry, train is full."));
+        return ResponseEntity.status(400).body(new Error(101, "Sorry, train is fully booked."));
     }
 
     @ExceptionHandler(TicketNotFoundException.class)

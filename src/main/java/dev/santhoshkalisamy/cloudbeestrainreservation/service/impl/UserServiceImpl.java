@@ -10,19 +10,15 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-
-    @Autowired
     private UserRepository userRepository;
+    @Autowired
+    public void setUserRepository(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails getUserByEmailId(String emailId) {
         return userRepository.findUserByEmail(emailId);
-    }
-
-    @Override
-    public UserDetails getUserById(int id) {
-        Optional<UserDetails> user = userRepository.findById(id);
-        return user.orElse(null);
     }
 
     @Override

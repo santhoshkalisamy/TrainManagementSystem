@@ -21,18 +21,8 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public Seat findUnAllocatedSeat(Train train) {
-        return null;
-    }
-
-    @Override
-    public Seat findUnAllocatedSeat(Section section) {
-        return null;
-    }
-
-    @Override
     public Seat findUnAllocatedSeat() {
-        List<Seat> freeSeats = seatRepository.findSeatsByAllocatedIsFalseOrderBySeatNumberAscSectionAsc();
+        List<Seat> freeSeats = seatRepository.findSeatsByAllocatedIsFalseOrderBySection_NameAscSeatNumberAsc();
         if(!freeSeats.isEmpty()) {
             return freeSeats.get(0);
         }
@@ -40,7 +30,7 @@ public class SeatServiceImpl implements SeatService {
     }
 
     @Override
-    public Seat findUnAllocatedSeatBySeatNumberAndSectionName(int seatNumber, String sectionName) {
+    public Seat findUnAllocatedSeatBySeatNumberAndSectionName(Integer seatNumber, String sectionName) {
         return seatRepository.findSeatsBySeatNumberAndAllocatedIsFalseAndSection_Name(seatNumber, sectionName);
     }
 
@@ -54,20 +44,5 @@ public class SeatServiceImpl implements SeatService {
     public Seat allocateSeat(Seat seat) {
         seat.setAllocated(true);
         return seatRepository.save(seat);
-    }
-
-    @Override
-    public Seat findAllSeats(Train train) {
-        return null;
-    }
-
-    @Override
-    public Seat findAllSeats(Section section) {
-        return null;
-    }
-
-    @Override
-    public Seat findAllSeats() {
-        return null;
     }
 }

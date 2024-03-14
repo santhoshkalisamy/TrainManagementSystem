@@ -31,14 +31,13 @@ public class SeatServiceImplTest {
     public void testFindUnAllocatedSeat() {
         Seat seat = new Seat();
         seat.setSeatNumber(10);
-        Mockito.when(seatRepository.findSeatsByAllocatedIsFalseOrderBySeatNumberAscSectionAsc()).thenReturn(List.of(seat));
+        Mockito.when(seatRepository.findSeatsByAllocatedIsFalseOrderBySection_NameAscSeatNumberAsc()).thenReturn(List.of(seat));
         Assert.notNull(seatService.findUnAllocatedSeat(), "Response Cannot be null");
         Assert.isTrue(seatService.findUnAllocatedSeat().getSeatNumber() == 10, "Seat number must be 10");
     }
 
     @Test
     public void testFindUnAllocatedSeatNullEmptyList() {
-        Mockito.when(seatRepository.findSeatsByAllocatedIsFalseOrderBySeatNumberAscSectionAsc()).thenReturn(List.of());
         Assert.isNull(seatService.findUnAllocatedSeat(), "Response Cannot be null");
     }
 

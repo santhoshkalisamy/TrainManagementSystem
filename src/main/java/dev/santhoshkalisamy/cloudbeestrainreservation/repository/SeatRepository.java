@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface SeatRepository extends JpaRepository<Seat, Integer> {
-    public List<Seat> findSeatsByAllocatedIsFalseOrderBySeatNumberAscSectionAsc();
-
+    public List<Seat> findSeatsByAllocatedIsFalseOrderBySeatNumber();
+    public List<Seat> findSeatsByAllocatedIsFalseOrderBySection_NameAscSeatNumberAsc();
     public Seat findSeatsBySeatNumberAndAllocatedIsFalseAndSection_Name(int seatNumber, String sectionName);
  }

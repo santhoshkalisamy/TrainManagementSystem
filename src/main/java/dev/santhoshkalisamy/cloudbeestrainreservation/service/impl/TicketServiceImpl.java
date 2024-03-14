@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class TicketServiceImpl implements TicketService {
 
+    public static final double TICKET_PRICE = 5.0;
     private TicketRepository ticketRepository;
 
     private SeatService seatService;
@@ -48,8 +49,7 @@ public class TicketServiceImpl implements TicketService {
         Seat seat = seatService.findUnAllocatedSeat();
         if(seat != null) {
             seat = seatService.allocateSeat(seat);
-            Ticket ticket = generateTicket(ticketPurchaseRequest, seat, userDetails);
-            return generateReceipt(ticket);
+            return generateReceipt(generateTicket(ticketPurchaseRequest, seat, userDetails));
         } else {
             throw new TrainFullException();
         }
@@ -115,7 +115,7 @@ public class TicketServiceImpl implements TicketService {
         ticket.setUserDetails(userDetails);
         ticket.setSource(ticketPurchaseRequest.from());
         ticket.setDestination(ticketPurchaseRequest.to());
-        ticket.setPrice(5.0);
+        ticket.setPrice(TICKET_PRICE);
         ticket = ticketRepository.save(ticket);
         return ticket;
     }
